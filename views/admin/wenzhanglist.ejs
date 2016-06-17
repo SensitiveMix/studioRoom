@@ -1,0 +1,25 @@
+<% layout('admin/master.ejs')%>
+<div class="box box-info">
+    <div class="box-header with-border">
+        <h5 class="box-title ">文章管理</h5>
+    </div>
+    <!-- /.box-header -->
+    <!-- form start -->
+    <div class="box-body">
+        <a href="addwenzhang" class='btn bg-purple pull-right margin'>添加文章</a>
+        <table id="robotetable" class="table table-bordered " aria-describedby="example2_info">
+            <thead>
+            <tr><th>文章标题</th><th>作者</th><th>分类</th><th>日期</th><th></th><th></th></tr>
+            </thead>
+            <tbody>
+            <%wenzhanglists.forEach(function(wenzhang){%>
+            <tr><td><%=wenzhang.title%></td><td><%=wenzhang.author%></td><td><%=wenzhang.cat%></td><td><%=wenzhang.date%></td><td><a href="dodeletewenzhang/<%=wenzhang._id%>" type="button" class="btn bg-purple btn-flat">删除</a> </td></tr>
+            <%})%>
+            </tbody>
+            <tfoot>
+            </tfoot>
+        </table>
+    </div>
+
+
+</div>

@@ -1,0 +1,79 @@
+<% layout('admin/master.ejs')%>
+<div class="box box-info">
+    <div class="box-header with-border">
+        <h3 class="box-title">消息审核</h3>
+    </div>
+    <!-- /.box-header -->
+    <!-- form start -->
+
+
+    <div class="box-body">
+        <form id="changeName" action="dosysset" method="post" class="form-horizontal">
+            <div style="height: 100%" id="Y_PubMes_Div">
+                <ul id="message">
+
+                </ul>
+            </div>
+
+        </form>
+    </div>
+    <!-- /.box-body -->
+
+    <!-- /.box-footer -->
+
+</div>
+<script src="http://localhost:3000/socket.io/socket.io.js"></script>
+<script language="javascript" type="text/javascript" src="/js/clientofmessage.js"></script>
+<script type="text/javascript">
+
+    $(function(){
+
+        CHAT.init();
+
+        <% messagevalue.forEach(function(messagevalue){ %>
+            var isme = true;
+            var timeSpan = '<span class="a"><%=messagevalue.date%></span>&nbsp&nbsp&nbsp';
+            var imgoflevel = '<img class="Role Manager2" src="/images/' + <%=messagevalue.level%>  + '.png">&nbsp&nbsp';
+            var contentDiv = '<a class="u" name="u" ><%=messagevalue.username%></a>&nbsp&nbsp&nbsp&nbsp';
+            var usernameDiv = '<span class="b" name="b" ><%=messagevalue.content%> </span>&nbsp&nbsp';
+            var userlevel = '<input class="le" value="<%=messagevalue.level%>" type="hidden" name="le" ></input>';
+            var userip = '<input class="le1" value="<%=messagevalue.ip%> " type="hidden" name="le1" ></input>';
+            var userid = '<input class="id" value=" <%=messagevalue.userid%> " type="hidden" name="id" ></input>';
+            var msgid='<input class="msgid" value="<%=messagevalue.msgid%>" type="hidden" name="msgid" ></input>';
+
+            var button= document.createElement('input');
+            button.className="message_update";
+            button.onclick=CHAT.messsgesubmit1;
+            button.setAttribute("type","button");
+            button.setAttribute("value","通过");
+
+            var cancel= document.createElement('input');
+            cancel.className="message_update";
+            cancel.onclick=CHAT.messsgecancel;
+            cancel.setAttribute("type","button");
+            cancel.setAttribute("value","驳回");
+
+            var section = document.createElement('li');
+
+            if (isme) {
+                section.className = 'user';
+                section.innerHTML = timeSpan + imgoflevel + contentDiv + usernameDiv+userlevel+userip+userid+msgid;
+            } else {
+                section.className = 'service';
+                section.innerHTML = timeSpan + imgoflevel + contentDiv + usernameDiv+userlevel+userip+userid+msgid;
+            }
+            section.appendChild(button);
+            section.appendChild(cancel);
+            CHAT.msgObj.appendChild(section);
+
+         <%
+
+        })
+        %>
+
+
+
+
+    });
+
+</script>

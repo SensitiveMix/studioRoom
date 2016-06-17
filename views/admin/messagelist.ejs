@@ -1,0 +1,58 @@
+<% layout('admin/master.ejs')%>
+<div class="box box-info">
+    <div class="box-header with-border">
+        <h3 class="box-title">聊天记录</h3>
+    </div>
+    <!-- /.box-header -->
+    <!-- form start -->
+    <div class="box-body">
+        <table id="robotetable" class="table table-bordered  dataTable no-footer" aria-describedby="">
+            <thead>
+            <tr><th >发言人</th><th>发言内容</th><th>发言时间</th></tr>
+            </thead>
+            <tbody>
+            </tbody>
+            <tfoot>
+            </tfoot>
+        </table>
+    </div>
+
+    <!-- /.box-body -->
+
+    <!-- /.box-footer -->
+
+</div>
+<script src="../plugins/datatables/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" href="../plugins/datatables/jquery.dataTables.css">
+<script>
+    var trNodep;
+    $(document).ready(function() {
+        //显示机器人列表
+        $('#robotetable').DataTable( {
+            "ajax": "findmessages",//获取数据的url
+            "bFilter": false,                       //不使用过滤功能
+            "bLengthChange": false,                 //用户不可改变每页显示数量
+            "iDisplayLength":9,                    //每页显示8条数据
+            "oLanguage": {                          //汉化
+                "sLengthMenu": "每页显示 _MENU_ 条记录",
+                "sZeroRecords": "没有检索到数据",
+                "sInfo": "当前数据为从第 _START_ 到第 _END_ 条数据；总共有 _TOTAL_ 条记录",
+                "sInfoEmtpy": "没有数据",
+                "sProcessing": "正在加载数据...",
+                "oPaginate": {
+                    "sFirst": "首页",
+                    "sPrevious": "前页",
+                    "sNext": "后页",
+                    "sLast": "尾页"
+                }
+            },
+            "columns": [
+                { "data": "username"},
+                { "data": "content" },
+                { "data": "sendtime"}
+            ]
+        } );
+        //删除机器人
+
+    } );
+</script>

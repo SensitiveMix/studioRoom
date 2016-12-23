@@ -1,0 +1,5 @@
+.idea
+node_module
+.DS
+npm-debug.log
+npm-error.log
